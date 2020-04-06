@@ -127,6 +127,11 @@ class NotificationsWidget extends Widget
     public $deleteAllSelector = null;
 
     /**
+     * @var string A JS callback to use instead of going to the default route
+     */
+    public $customCallback = null;
+
+    /**
      * @var string The jQuery selector in which the notifications list should
      *             be rendered
      */
@@ -219,6 +224,10 @@ class NotificationsWidget extends Widget
         if ($this->deleteAllSelector) {
             $params['deleteAllSelector'] = $this->deleteAllSelector;
             $params['deleteAllUrl'] = Url::to(['/notifications/notifications/delete-all']);
+        }
+
+        if ($this->customCallback) {
+            $params['customCallback'] = $this->customCallback;
         }
 
         if ($this->listSelector) {

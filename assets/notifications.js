@@ -165,6 +165,7 @@ var Notifications = (function(options) {
         seenAllUrl: '', // Overwritten by widget
         deleteUrl: '', // Overwritten by widget
         deleteAllUrl: '', // Overwritten by widget
+        customCallback: '', // Overwritten by widget
         flashUrl: '',
         pollInterval: 5000,
         pollSeen: false,
@@ -341,7 +342,11 @@ var Notifications = (function(options) {
                         elem = self.renderRow(object);
                         elem = self.opts.listItemBeforeRender(elem);
                         elem.click(function() {
-                            document.location = $(this).data('route');
+                            if (self.opts.customCallback.length) {
+                                eval(self.opts.customCallback);
+                            } else {
+                                document.location = $(this).data('route');
+                            }
                         }).appendTo(self.opts.listSelector);
                     }
                 });
